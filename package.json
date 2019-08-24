@@ -1,0 +1,35 @@
+{
+  "name": "sd1",
+  "version": "0.1.0",
+  "description": "Calculadora cientifica tema do trabalho da disciplina de Sistemas Distribuidos.",
+  "main": "src/index.js",
+  "repository": "https://github.com/otaviotech/sd1",
+  "author": "Otavio Araujo",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint --fix src/**/*.js",
+    "test": "lab --coverage --colors --verbose"
+  },
+  "devDependencies": {
+    "@hapi/code": "^6.0.0",
+    "@hapi/lab": "^20.2.1",
+    "@types/mathjs": "^6.0.1",
+    "chalk": "^2.4.2",
+    "eslint": "^6.2.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "@hapi/boom": "^7.4.3",
+    "dotenv": "^8.1.0",
+    "fibonacci": "^1.6.7",
+    "hapi": "^18.1.0",
+    "hapi-router": "5",
+    "mathjs": "^6.1.0"
+  }
+}
