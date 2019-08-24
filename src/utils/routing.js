@@ -1,6 +1,8 @@
+const env = require('./env');
+
 const namespaceRoutesWith = (namespace) => (route) => ({
   ...route,
-  path: `/${namespace}/${route.path}`,
+  path: `/v${env.API_VERSION}/${namespace}/${route.path}`,
 });
 
 

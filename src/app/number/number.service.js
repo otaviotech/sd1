@@ -1,3 +1,7 @@
+/**
+ * @module NumberService
+ */
+
 const mathjs = require('mathjs');
 const Fibonacci = require('fibonacci');
 
@@ -28,6 +32,7 @@ function pow(number, expoent) {
 function fibonacci(number) {
   return Fibonacci.iterate(number);
 }
+
 
 module.exports = {
   factorial,

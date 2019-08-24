@@ -1,7 +1,14 @@
+/**
+ * @module CalculatorService
+ */
+
+
 const mathjs = require('mathjs');
+const { withoutSpaces } = require('../../utils/string');
 
 function evaluate(expression) {
-  return mathjs.evaluate(expression);
+  const sanitizedExpression = withoutSpaces(expression);
+  return mathjs.evaluate(sanitizedExpression);
 }
 
 /**
