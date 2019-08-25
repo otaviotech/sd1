@@ -23,7 +23,9 @@ async function generateSwaggerUi() {
   await fs.copy(pathToSwaggerUi, swaggerOutputDirectory);
   await fs.copy(swaggerYml, swaggerOutputYml);
   let output = await fs.readFile(newIndexHtml);
-  output = output.toString().replace('https://petstore.swagger.io/v2/swagger.json', 'swagger.yml');
+  output = output.toString()
+    .replace('https://petstore.swagger.io/v2/swagger.json', 'swagger.yml')
+    .replace('{{ host }}', `${env.APP_URL}`);
   await fs.writeFileSync(newIndexHtml, output, 'utf8');
 }
 
