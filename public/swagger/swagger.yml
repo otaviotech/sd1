@@ -1,0 +1,252 @@
+swagger: "2.0"
+info:
+  description: "Uma calculadora científica."
+  version: "0.1.0"
+  title: "Swagger calculadora científica"
+  # termsOfService: "http://swagger.io/terms/"
+  contact:
+    name: "Otávio Araújo"
+    email: "otaviotech@gmail.com"
+  license:
+    name: "MIT"
+    # url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3000"
+basePath: "/v1"
+tags:
+- name: "Number"
+  description: "Um número qualquer tratado como recurso."
+  externalDocs:
+    description: "Veja em ação no frontend"
+    url: "http://swagger.io"
+- name: "Calculator"
+  description: "Uma calculadora que resolve expressões matemáticas."
+
+schemes:
+- "https"
+- "http"
+
+paths:
+  /number/{number}/pow/{expoent}:
+    get:
+      tags:
+      - "Number"
+      summary: "Calcula um número elevado a uma certa potência."
+      description: "Calcula um número elevado a uma certa potência. Ex: 2^3 = 8"
+      externalDocs:
+        description: "As expressões são resolvidas utilizando a biblioteca mathjs. Neste caso utilizando o método pow."
+        url: "https://mathjs.org/docs/reference/functions/pow.html"
+      operationId: "pow"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "number"
+        description: "O número"
+        required: true
+        type: number
+      - in: "path"
+        name: "expoent"
+        description: "O expoent"
+        required: true
+        type: number
+      responses:
+        200:
+          description: "Ok"
+        400:
+          description: "Invalid input"
+        500:
+          description: "Error processing request"
+
+  /number/{number}/factorial:
+    get:
+      tags:
+      - "Number"
+      summary: "Calcula o fatorial de um número."
+      description: "Calcula o fatorial de um número. Ex: 4! = 4 * 3 * 2 * 1 = 24"
+      externalDocs:
+        description: "As expressões são resolvidas utilizando a biblioteca mathjs. Neste caso utilizando o método factorial."
+        url: "https://mathjs.org/docs/reference/functions/factorial.html"
+      operationId: "factorial"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "number"
+        description: "O número"
+        required: true
+        type: number
+      responses:
+        200:
+          description: "Ok"
+        400:
+          description: "Invalid input"
+        500:
+          description: "Error processing request"
+
+  /number/{number}/fibonacci:
+    get:
+      tags:
+      - "Number"
+      summary: "Retorna o número de índice {number} na sequência de Fibonacci."
+      description: "Retorna o número de índice {number} na sequência de Fibonacci. \n Obs: suporta numeros grandes. \n Ex: 387 = '337856107814181089864066841370437948648180483483258553487263501935155470092051458'"
+      externalDocs:
+        description: "Biblioteca utilizada para realizar o calculo da sequência de fibonacci de forma dinâmica: \"nodejs-fibonacci\""
+        url: "https://github.com/fvdm/nodejs-fibonacci"
+      operationId: "fibonacci"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "number"
+        description: "O número (índice na sequencia de Fibonacci)"
+        required: true
+        type: number
+      responses:
+        200:
+          description: "Ok"
+        400:
+          description: "Invalid input"
+        500:
+          description: "Error processing request"
+
+  /calculator/:
+    get:
+      tags:
+      - "Calculator"
+      summary: "Calcula o resultado de uma expressão matemática."
+      description: "Avalia uma expressão matemática. Ex: ( ( 2 + 2 ) + ( 1 + 1 ) ) / 2 = 3"
+      externalDocs:
+        description: "As expressões são resolvidas utilizando a biblioteca mathjs. Neste caso utilizando o método evaluate."
+        url: "https://mathjs.org/docs/expressions/parsing.html#evaluate"
+      operationId: "evaluateExpression"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "expression"
+        description: "A expressão a ser resolvida."
+        required: true
+        type: string
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: '#/definitions/CalculatorApiResponse'
+        400:
+          description: "Invalid input"
+        500:
+          description: "Error processing request"
+
+  /calculator/average:
+    get:
+      tags:
+      - "Calculator"
+      summary: "Calcula a média aritimética de uma coleção de números."
+      description: "Calcula a média aritimética de uma coleção de números."
+      externalDocs:
+        description: "As expressões são resolvidas utilizando a biblioteca mathjs. Neste caso utilizando o método mean."
+        url: "https://mathjs.org/docs/reference/functions/mean.html"
+      operationId: "average"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+
+      parameters:
+      - in: "query"
+        name: "numbers"
+        description: "A coleção de números."
+        required: true
+        type: array
+        items:
+          type: number
+        collectionFormat: multi
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/CalculatorCollectionInputApiResponse"
+        400:
+          description: "Invalid input"
+        500:
+          description: "Error processing request"
+
+  /calculator/median:
+    get:
+      tags:
+      - "Calculator"
+      summary: "Calcula a mediana de uma coleção de números."
+      description: "Calcula a mediana de uma coleção de números."
+      externalDocs:
+        description: "As expressões são resolvidas utilizando a biblioteca mathjs. Neste caso utilizando o método median."
+        url: "https://mathjs.org/docs/reference/functions/median.html"
+      operationId: "median"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "numbers"
+        description: "A coleção de números."
+        required: true
+        type: array
+        items:
+          type: number
+        collectionFormat: multi
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/CalculatorCollectionInputApiResponse"
+        400:
+          description: "Invalid input"
+        500:
+          description: "Error processing request"
+
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "X-API-KEY"
+    in: "header"
+
+security:
+  - api_key: []
+
+definitions:
+  CalculatorCollectionInputApiResponse:
+    type: "object"
+    properties:
+      numbers:
+        type: "array"
+        items:
+          type: "number"
+      action:
+        type: "string"
+      result:
+        type: "number"
+      success:
+        type: "boolean"
+  CalculatorApiResponse:
+    type: "object"
+    properties:
+      expression:
+        type: "string"
+      action:
+        type: "string"
+      result:
+        type: "number"
+      success:
+        type: "boolean"
+
+externalDocs:
+  description: "Saiba mais sobre o Swagger"
+  url: "http://swagger.io"

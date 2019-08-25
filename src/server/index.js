@@ -1,15 +1,48 @@
+const fs = require('fs-extra');
+const path = require('path');
 const Hapi = require('hapi');
 const HapiRouter = require('hapi-router');
 const HapiApiKeyPlugin = require('hapi-api-key');
 // const Blipp = require('blipp');
+const pathToSwaggerUi = require('swagger-ui-dist').absolutePath();
+const Inert = require('@hapi/inert');
 const env = require('../utils/env');
+const constants = require('../utils/constants');
 
 let server;
 
+/**
+ * Gera a interface do Swagger.
+ */
+async function generateSwaggerUi() {
+  const swaggerYml = path.resolve(constants.PROJECT_ROOT, 'swagger.yaml');
+  const newIndexHtml = path.resolve(constants.PUBLIC_DIRECTORY, 'swagger/index.html');
+  const swaggerOutputYml = path.resolve(constants.PUBLIC_DIRECTORY, 'swagger/swagger.yml');
+  const swaggerOutputDirectory = path.resolve(constants.PUBLIC_DIRECTORY, 'swagger');
+
+  await fs.copy(pathToSwaggerUi, swaggerOutputDirectory);
+  await fs.copy(swaggerYml, swaggerOutputYml);
+  let output = await fs.readFile(newIndexHtml);
+  output = output.toString().replace('https://petstore.swagger.io/v2/swagger.json', 'swagger.yml');
+  await fs.writeFileSync(newIndexHtml, output, 'utf8');
+}
+
 async function init() {
   await server.initialize();
-
   return server;
+}
+
+async function registerPlugins() {
+  await server.register([
+    {
+      plugin: HapiRouter,
+      options: {
+        routes: '**/*.ctrl.js',
+      },
+    },
+    HapiApiKeyPlugin,
+    Inert,
+  ]);
 }
 
 async function start() {
@@ -28,29 +61,41 @@ module.exports = async function createServer(serverConfig = {
     ...serverConfig,
     routes: {
       cors: {
-        origin: ['*'], // an array of origins or 'ignore'
-        headers: ['X-API-KEY'], // an array of strings - 'Access-Control-Allow-Headers'
-        exposedHeaders: ['Accept'], // an array of exposed headers - 'Access-Control-Expose-Headers',
-        additionalExposedHeaders: ['Accept'], // an array of additional exposed headers
+        origin: ['*'],
+        headers: ['X-API-KEY'],
+        exposedHeaders: ['Accept'],
+        additionalExposedHeaders: ['Accept'],
         maxAge: 60,
-        credentials: true, // boolean - 'Access-Control-Allow-Credentials'
+        credentials: true,
+      },
+      files: {
+        relativeTo: constants.PUBLIC_DIRECTORY,
       },
     },
   });
 
-  await server.register([
-    {
-      plugin: HapiRouter,
-      options: {
-        routes: '**/*.ctrl.js',
+  await registerPlugins();
+
+  server.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+      directory: {
+        path: constants.PUBLIC_DIRECTORY,
+        redirectToSlash: true,
+        index: true,
       },
     },
-    HapiApiKeyPlugin,
-  ]);
+    config: {
+      auth: false,
+    },
+  });
+
+  generateSwaggerUi();
 
   server.auth.strategy('api-key', 'api-key', {
     apiKeys: {
-      'swagger-d8084d44-9721-497d-b1df-f18efc92738c': {
+      [env.SWAGGER_API_KEY]: {
         name: 'swagger',
       },
     },

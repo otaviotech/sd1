@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon --ignore public/ src/index.js --watch ./swagger.yaml --watch ./src/.*",
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint --fix src/**/*.js",
     "test": "lab --coverage --colors --verbose",
@@ -32,10 +32,12 @@
     "@hapi/inert": "^5.2.1",
     "dotenv": "^8.1.0",
     "fibonacci": "^1.6.7",
+    "fs-extra": "^8.1.0",
     "hapi": "^18.1.0",
     "hapi-api-key": "^3.3.0",
     "hapi-router": "5",
     "mathjs": "^6.1.0",
-    "semver": "^6.3.0"
+    "semver": "^6.3.0",
+    "swagger-ui-dist": "~3.23.6"
   }
 }

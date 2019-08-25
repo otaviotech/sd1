@@ -6,4 +6,5 @@ module.exports = {
   APP_PORT: process.env.PORT,
   APP_MAJOR_VERSION: semver.major(packageJson.version),
   API_VERSION: semver.major(packageJson.version) + 1,
+  SWAGGER_API_KEY: process.env.SWAGGER_API_KEY,
 };
