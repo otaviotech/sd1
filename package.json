@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "start": "node ./src/index.js",
     "dev": "nodemon --ignore public/ src/index.js --watch ./swagger.yaml --watch ./src/.*",
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint --fix src/**/*.js",
