@@ -15,18 +15,23 @@ let server;
  * Gera a interface do Swagger.
  */
 async function generateSwaggerUi() {
-  const swaggerYml = path.resolve(constants.PROJECT_ROOT, 'swagger.yaml');
+  const swaggerYmlPath = path.resolve(constants.PROJECT_ROOT, 'swagger.yaml');
   const newIndexHtml = path.resolve(constants.PUBLIC_DIRECTORY, 'swagger/index.html');
-  const swaggerOutputYml = path.resolve(constants.PUBLIC_DIRECTORY, 'swagger/swagger.yml');
+  const swaggerOutputYmlPath = path.resolve(constants.PUBLIC_DIRECTORY, 'swagger/swagger.yml');
   const swaggerOutputDirectory = path.resolve(constants.PUBLIC_DIRECTORY, 'swagger');
 
   await fs.copy(pathToSwaggerUi, swaggerOutputDirectory);
-  await fs.copy(swaggerYml, swaggerOutputYml);
-  let output = await fs.readFile(newIndexHtml);
-  output = output.toString()
+  await fs.copy(swaggerYmlPath, swaggerOutputYmlPath);
+  let indexHtmlOutput = await fs.readFile(newIndexHtml);
+  indexHtmlOutput = indexHtmlOutput.toString()
+    .replace('https://petstore.swagger.io/v2/swagger.json', 'swagger.yml');
+  await fs.writeFileSync(newIndexHtml, indexHtmlOutput, 'utf8');
+
+  let swaggerYmlOutput = await fs.readFile(swaggerOutputYmlPath);
+  swaggerYmlOutput = swaggerYmlOutput.toString()
     .replace('https://petstore.swagger.io/v2/swagger.json', 'swagger.yml')
     .replace('{{ host }}', env.APP_URL);
-  await fs.writeFileSync(newIndexHtml, output, 'utf8');
+  await fs.writeFileSync(swaggerOutputYmlPath, swaggerYmlOutput, 'utf8');
 }
 
 async function init() {
