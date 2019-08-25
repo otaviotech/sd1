@@ -25,7 +25,7 @@ async function generateSwaggerUi() {
   let output = await fs.readFile(newIndexHtml);
   output = output.toString()
     .replace('https://petstore.swagger.io/v2/swagger.json', 'swagger.yml')
-    .replace('{{ host }}', `${env.APP_URL}`);
+    .replace('{{ host }}', env.APP_URL);
   await fs.writeFileSync(newIndexHtml, output, 'utf8');
 }
 
