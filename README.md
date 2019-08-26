@@ -1,4 +1,4 @@
-# sd1
+# sd1 [![Build Status](https://travis-ci.com/otaviotech/sd1.svg?token=MCeACzihHrn4wsggCZWq&branch=master)](https://travis-ci.com/otaviotech/sd1) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 Calculadora cientifica tema do trabalho da disciplina de Sistemas Distribuidos.
 
 Uma API Rest para realizar cálculos matemáticos.
@@ -51,6 +51,11 @@ Documentação | Rota
  API (Codebase) | /docs | C1
  Swagger (Rest API) | /swagger | C2
 
+# Continuous Integration (CI)
+
+Configurado com o [TravisCI](https://travis-ci.com) para executar os testes.
+
 # Licença
 
-[MIT](LICENSE)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](LICENSE)
+
