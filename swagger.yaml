@@ -3,21 +3,20 @@ info:
   description: "Uma calculadora científica."
   version: "0.1.0"
   title: "Swagger calculadora científica"
-  # termsOfService: "http://swagger.io/terms/"
   contact:
     name: "Otávio Araújo"
     email: "otaviotech@gmail.com"
   license:
     name: "MIT"
-    # url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    url: "https://github.com/otaviotech/sd1/blob/master/LICENSE"
 host: "{{ host }}"
 basePath: "/v1"
 tags:
 - name: "Number"
   description: "Um número qualquer tratado como recurso."
   externalDocs:
-    description: "Veja em ação no frontend"
-    url: "http://swagger.io"
+    description: "Vejao repositório no Github:"
+    url: "https://github.com/otaviotech/sd1"
 - name: "Calculator"
   description: "Uma calculadora que resolve expressões matemáticas."
 
