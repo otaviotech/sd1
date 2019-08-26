@@ -14,7 +14,8 @@
     "lint:fix": "eslint --fix src/**/*.js",
     "test": "lab --coverage --colors --verbose",
     "docs:generate": "jsdoc src -r --destination public/docs",
-    "docs:generate:swagger": "node scripts/generateSwaggerDocs.js"
+    "docs:generate:swagger": "node scripts/generateSwaggerDocs.js",
+    "build": "yarn run docs:generate && yarn run docs:generate:swagger"
   },
   "devDependencies": {
     "@hapi/code": "^6.0.0",
