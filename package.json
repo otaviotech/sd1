@@ -13,7 +13,8 @@
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint --fix src/**/*.js",
     "test": "lab --coverage --colors --verbose",
-    "docs:generate": "jsdoc src -r --destination docs"
+    "docs:generate": "jsdoc src -r --destination public/docs",
+    "docs:generate:swagger": "node scripts/generateSwaggerDocs.js"
   },
   "devDependencies": {
     "@hapi/code": "^6.0.0",
