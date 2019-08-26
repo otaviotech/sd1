@@ -1,3 +1,5 @@
+// $lab:coverage:off$
+
 const Boom = require('@hapi/boom');
 const routingUtils = require('../../utils/routing');
 const numberService = require('./number.service');
@@ -64,3 +66,4 @@ module.exports = [
     },
   },
 ].map(routingUtils.namespaceRoutesWith('number'));
+// $lab:coverage:on$

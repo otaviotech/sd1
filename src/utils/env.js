@@ -1,3 +1,5 @@
+// $lab:coverage:off$
+
 const semver = require('semver');
 const packageJson = require('../../package.json');
 
@@ -9,3 +11,5 @@ module.exports = {
   API_VERSION: semver.major(packageJson.version) + 1,
   SWAGGER_API_KEY: process.env.SWAGGER_API_KEY,
 };
+
+// $lab:coverage:on$

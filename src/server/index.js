@@ -1,3 +1,5 @@
+// $lab:coverage:off$
+
 const Hapi = require('hapi');
 const HapiRouter = require('hapi-router');
 const HapiApiKeyPlugin = require('hapi-api-key');
@@ -80,7 +82,9 @@ module.exports = async function createServer(serverConfig = {
     },
   });
 
-  server.auth.default('api-key');
+  if (process.env.NODE_ENV !== 'test') {
+    server.auth.default('api-key');
+  }
 
   // await server.register({ plugin: Blipp, options: { showAuth: true } });
 
@@ -90,3 +94,5 @@ module.exports = async function createServer(serverConfig = {
     start,
   };
 };
+
+// $lab:coverage:on$

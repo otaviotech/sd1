@@ -6,7 +6,7 @@ const {
 } = exports.lab = Lab.script();
 const createServer = require('../src/server');
 
-describe('GET /v1/number/2/pow/3', () => {
+describe('GET /v1/calculator/?expression=(2+2)/2', () => {
   let server;
 
   beforeEach(async () => {
@@ -21,7 +21,7 @@ describe('GET /v1/number/2/pow/3', () => {
   it('responds with 200', async () => {
     const res = await server.inject({
       method: 'GET',
-      url: '/v1/number/2/pow/3',
+      url: `/v1/calculator/?expression=${encodeURIComponent('(2 + 2) / 2')}`,
     });
 
     expect(res.statusCode).to.equal(200);
@@ -30,7 +30,7 @@ describe('GET /v1/number/2/pow/3', () => {
   it('responds with the right feedback', async () => {
     const res = await server.inject({
       method: 'GET',
-      url: '/v1/number/2/pow/3',
+      url: `/v1/calculator/?expression=${encodeURIComponent('(2 + 2) / 2')}`,
     });
 
     expect(res.result.success).to.be.true();
@@ -39,14 +39,14 @@ describe('GET /v1/number/2/pow/3', () => {
   it('responds with the right value', async () => {
     const res = await server.inject({
       method: 'GET',
-      url: '/v1/number/2/pow/3',
+      url: `/v1/calculator/?expression=${encodeURIComponent('(2 + 2) / 2')}`,
     });
 
-    expect(res.result.result).to.equal(8);
+    expect(res.result.result).to.equal(2);
   });
 });
 
-describe('GET /v1/number/3/factorial', () => {
+describe('GET /v1/calculator/average?numbers=1&numbers=2&numbers=3&&numbers=4', () => {
   let server;
 
   beforeEach(async () => {
@@ -61,7 +61,7 @@ describe('GET /v1/number/3/factorial', () => {
   it('responds with 200', async () => {
     const res = await server.inject({
       method: 'GET',
-      url: '/v1/number/3/factorial',
+      url: '/v1/calculator/average?numbers=1&numbers=2&numbers=3&&numbers=4',
     });
 
     expect(res.statusCode).to.equal(200);
@@ -70,7 +70,7 @@ describe('GET /v1/number/3/factorial', () => {
   it('responds with the right feedback', async () => {
     const res = await server.inject({
       method: 'GET',
-      url: '/v1/number/3/factorial',
+      url: '/v1/calculator/average?numbers=1&numbers=2&numbers=3&&numbers=4',
     });
 
     expect(res.result.success).to.be.true();
@@ -79,14 +79,14 @@ describe('GET /v1/number/3/factorial', () => {
   it('responds with the right value', async () => {
     const res = await server.inject({
       method: 'GET',
-      url: '/v1/number/3/factorial',
+      url: '/v1/calculator/average?numbers=1&numbers=2&numbers=3&&numbers=4',
     });
 
-    expect(res.result.result).to.equal(6);
+    expect(res.result.result).to.equal(2.5);
   });
 });
 
-describe('GET /v1/number/500/fibonacci', () => {
+describe('GET /v1/calculator/median?numbers=1&numbers=2&numbers=3&&numbers=4&numbers=5', () => {
   let server;
 
   beforeEach(async () => {
@@ -101,7 +101,7 @@ describe('GET /v1/number/500/fibonacci', () => {
   it('responds with 200', async () => {
     const res = await server.inject({
       method: 'GET',
-      url: '/v1/number/500/fibonacci',
+      url: '/v1/calculator/median?numbers=1&numbers=2&numbers=3&&numbers=4&numbers=5',
     });
 
     expect(res.statusCode).to.equal(200);
@@ -110,7 +110,7 @@ describe('GET /v1/number/500/fibonacci', () => {
   it('responds with the right feedback', async () => {
     const res = await server.inject({
       method: 'GET',
-      url: '/v1/number/500/fibonacci',
+      url: '/v1/calculator/median?numbers=1&numbers=2&numbers=3&&numbers=4&numbers=5',
     });
 
     expect(res.result.success).to.be.true();
@@ -119,9 +119,9 @@ describe('GET /v1/number/500/fibonacci', () => {
   it('responds with the right value', async () => {
     const res = await server.inject({
       method: 'GET',
-      url: '/v1/number/500/fibonacci',
+      url: '/v1/calculator/median?numbers=1&numbers=2&numbers=3&&numbers=4&numbers=5',
     });
 
-    expect(res.result.result).to.equal('139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125');
+    expect(res.result.result).to.equal(3);
   });
 });
