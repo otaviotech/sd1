@@ -15,7 +15,7 @@ tags:
 - name: "Number"
   description: "Um número qualquer tratado como recurso."
   externalDocs:
-    description: "Vejao repositório no Github:"
+    description: "Veja o repositório no Github:"
     url: "https://github.com/otaviotech/sd1"
 - name: "Calculator"
   description: "Uma calculadora que resolve expressões matemáticas."

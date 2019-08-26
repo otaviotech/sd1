@@ -3,6 +3,12 @@ Calculadora cientifica tema do trabalho da disciplina de Sistemas Distribuidos.
 
 Uma API Rest para realizar cálculos matemáticos.
 
+Link do projeto hospedado no Heroku: https://sd1-calculadora-cientifica.herokuapp.com
+
+Link das documentações do código fonte: https://sd1-calculadora-cientifica.herokuapp.com/docs
+
+Link das documentações do swagger fonte: https://sd1-calculadora-cientifica.herokuapp.com/swagger
+
 # Desenvolvimento
 
 ```sh
